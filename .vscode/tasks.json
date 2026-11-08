@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: настроить",
+      "type": "process",
+      "command": "cmake",
+      "args": ["-S", "${workspaceFolder}", "-B", "${workspaceFolder}/build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Собрать змейку",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "${workspaceFolder}/build"],
+      "dependsOn": "CMake: настроить",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Запустить змейку",
+      "type": "process",
+      "command": "${workspaceFolder}/build/zmeyka",
+      "options": { "cwd": "${workspaceFolder}" },
+      "dependsOn": "Собрать змейку",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true }
+    }
+  ]
+}
